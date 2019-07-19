@@ -12,6 +12,8 @@ This is the rest api for shopping list json model. Supported operations are:
 | PUT /lists/{listId}/update/{itemId}/{newQuantity} | Update quantity of an item by user specified value |
 | DELETE /lists/{listId}/{itemId} | Delete an item by id |
 
+Please refer to Swagger: [`http://localhost:8080/swagger-ui.html`](http://localhost:8080/swagger-ui.html)
+
 
 # Build and run
 
