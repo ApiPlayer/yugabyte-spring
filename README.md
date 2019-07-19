@@ -1,3 +1,13 @@
+# Shopping List Rest Api
+This is the rest api for shopping list json model. Supported operations are:
+  Create a shopping list;
+  Get a shopping list by id;
+  Add an item to a shopping list;
+  Delete a shopping list;
+  Increment quantity of an item;
+  Decrement quantity of an item;
+  Update quantity of an item by user specified value;
+
 # Build and run
 
 Build the REST API server (written using Spring code) as follows:
