@@ -1,12 +1,17 @@
 # Shopping List Rest Api
 This is the rest api for shopping list json model. Supported operations are:
-  Create a shopping list;
-  Get a shopping list by id;
-  Add an item to a shopping list;
-  Delete a shopping list;
-  Increment quantity of an item;
-  Decrement quantity of an item;
-  Update quantity of an item by user specified value;
+
+| End points    | Description   |
+| ------------- | ------------- |
+| POST /lists | Create a shopping list |
+| GET /lists/{listId} | Get a shopping list by id |
+| POST /lists/{listId} | Add an item to a shopping list |
+| DELETE /lists/{listId} | Delete a shopping list |
+| PUT /lists/{listId}/inc/{itemId} | Increment quantity of an item |
+| PUT /lists/{listId}/dec/{itemId} | Decrement quantity of an item |
+| PUT /lists/{listId}/update/{itemId}/{newQuantity} | Update quantity of an item by user specified value |
+| DELETE /lists/{listId}/{itemId} | Delete an item by id |
+
 
 # Build and run
 
