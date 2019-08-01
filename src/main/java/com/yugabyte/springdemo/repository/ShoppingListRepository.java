@@ -4,20 +4,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.yugabyte.springdemo.model.ShoppingList;
 import com.yugabyte.springdemo.model.Item;
 
+import java.util.UUID;
+
 public interface ShoppingListRepository {
     public ShoppingList saveList(ShoppingList shoppingList);
 
-    public ShoppingList findList(String listId);
+    public ShoppingList findList(UUID listId);
 
-    public ShoppingList addItem(String listId, Item item);
+    public ShoppingList addItem(UUID listId, Item item);
 
-    public ShoppingList incQuantity(String listId, String itemId);
+//    public ShoppingList incQuantity(UUID listId, String itemId);
+//
+//    public ShoppingList decQuantity(UUID listId, String itemId);
 
-    public ShoppingList decQuantity(String listId, String itemId);
+    public ShoppingList deleteList(UUID listId);
 
-    public ShoppingList deleteList(String listId);
+    public ShoppingList updateQuantity(UUID listId, UUID itemId, int newQuantity);
 
-    public ShoppingList updateQuantity(String listId, String itemId, int newQuantity);
-
-    public ShoppingList deleteItem(String listId, String itemId);
+    public ShoppingList deleteItem(UUID listId, UUID itemId);
 }

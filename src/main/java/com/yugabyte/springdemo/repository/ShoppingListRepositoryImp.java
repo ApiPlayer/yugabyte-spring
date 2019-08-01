@@ -26,57 +26,55 @@ public class ShoppingListRepositoryImp implements ShoppingListRepository
 
     @Override
     @Transactional
-    public ShoppingList findList(String listId) {
-        return entityManager.find(ShoppingList.class, listId);
+    public ShoppingList findList(UUID listId) {
+        ShoppingList shoppingList = entityManager.find(ShoppingList.class, listId);
+        return shoppingList;
     }
 
     @Override
     @Transactional
-    public ShoppingList addItem(String listId, Item item) {
-        ShoppingList curList = findList(listId);
-        curList.getItems().add(item);
-        return curList;
-    }
-
-    @Override
-    @Transactional
-    public ShoppingList incQuantity(String listId, String itemId) {
+    public ShoppingList addItem(UUID listId, Item item) {
         ShoppingList list = findList(listId);
-        for (Item item: list.getItems()) {
-            if (item.getItemId().equals(itemId)) {
-                item.incQuantity();
-            }
-        }
-        return list;
+        list.getItems().put(item.getItemId(), item);
+        return saveList(list);
     }
+
+//    @Override
+//    @Transactional
+//    public ShoppingList incQuantity(UUID listId, String itemId) {
+//        ShoppingList list = findList(listId);
+//        for (Item item: list.getItems()) {
+//            if (item.getItemId().equals(itemId)) {
+//                item.incQuantity();
+//            }
+//        }
+//        return list;
+//    }
+//
+//    @Override
+//    @Transactional
+//    public ShoppingList decQuantity(UUID listId, String itemId) {
+//        ShoppingList list = findList(listId);
+//        for (Item item: list.getItems()) {
+//            if (item.getItemId().equals(itemId)) {
+//                item.decQuantity();
+//            }
+//        }
+//        return list;
+//    }
 
     @Override
     @Transactional
-    public ShoppingList decQuantity(String listId, String itemId) {
+    public ShoppingList updateQuantity(UUID listId, UUID itemId, int delta) {
         ShoppingList list = findList(listId);
-        for (Item item: list.getItems()) {
-            if (item.getItemId().equals(itemId)) {
-                item.decQuantity();
-            }
-        }
-        return list;
+        Item item = list.getItems().get(itemId);
+        item.setQuantity(item.getQuantity() + delta);
+        return saveList(list);
     }
 
     @Override
     @Transactional
-    public ShoppingList updateQuantity(String listId, String itemId, int newQuantity) {
-        ShoppingList list = findList(listId);
-        for (Item item: list.getItems()) {
-            if (item.getItemId().equals(itemId)) {
-                item.setQuantity(newQuantity);
-            }
-        }
-        return list;
-    }
-
-    @Override
-    @Transactional
-    public ShoppingList deleteList(String listId) {
+    public ShoppingList deleteList(UUID listId) {
         ShoppingList list = findList(listId);
         entityManager.remove(list);
         return list;
@@ -84,14 +82,10 @@ public class ShoppingListRepositoryImp implements ShoppingListRepository
 
     @Override
     @Transactional
-    public ShoppingList deleteItem(String listId, String itemId) {
+    public ShoppingList deleteItem(UUID listId, UUID itemId) {
         ShoppingList list = findList(listId);
-        List<Item> items = list.getItems();
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getItemId().equals(itemId)) {
-                items.remove(i);
-            }
-        }
+        Map<UUID, Item> items = list.getItems();
+        items.remove(itemId);
         return list;
     }
 
