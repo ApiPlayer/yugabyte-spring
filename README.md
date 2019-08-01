@@ -1,3 +1,20 @@
+# Shopping List Rest Api
+This is the rest api for shopping list json model. Supported operations are:
+
+| End points    | Description   |
+| ------------- | ------------- |
+| POST /lists | Create a shopping list |
+| GET /lists/{listId} | Get a shopping list by id |
+| POST /lists/{listId} | Add an item to a shopping list |
+| DELETE /lists/{listId} | Delete a shopping list |
+| PUT /lists/{listId}/inc/{itemId} | Increment quantity of an item |
+| PUT /lists/{listId}/dec/{itemId} | Decrement quantity of an item |
+| PUT /lists/{listId}/update/{itemId}/{newQuantity} | Update quantity of an item by user specified value |
+| DELETE /lists/{listId}/{itemId} | Delete an item by id |
+
+Please refer to Swagger: [`http://localhost:8080/swagger-ui.html`](http://localhost:8080/swagger-ui.html)
+
+
 # Build and run
 
 Build the REST API server (written using Spring code) as follows:
